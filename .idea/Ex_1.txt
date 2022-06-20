@@ -1,0 +1,33 @@
+CREATE TABLE person(
+    person_id INT,
+    First_Name VARCHAR(255),
+    Last_Name VARCHAR(255)
+);
+
+CREATE TABLE address(
+    address_id INT,
+    person_id INT,
+    City VARCHAR(255),
+    State VARCHAR(255)
+);
+
+INSERT INTO person(person_id, First_Name, Last_Name)
+VALUES ('1', 'Wang','Allen');
+INSERT INTO address(address_id, person_id, City, State)
+VALUES ('1', '2', 'New York City', 'New York');
+
+SELECT First_name, Last_Name, City, State
+FROM person LEFT JOIN address ON person.person_id = address.person_id
+    UNION
+SELECT First_name, Last_Name, City, State
+FROM person RIGHT JOIN address ON person.person_id = address.person_id;
+
+/*
+Query result:
++------------+-----------+---------------+----------+
+| First_name | Last_Name | City          | State    |
++------------+-----------+---------------+----------+
+| Wang       | Allen     | NULL          | NULL     |
+| NULL       | NULL      | New York City | New York |
++------------+-----------+---------------+----------+
+*/

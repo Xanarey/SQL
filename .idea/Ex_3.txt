@@ -1,0 +1,43 @@
+CREATE TABLE employee(
+    id INT,
+    Name VARCHAR(255),
+    Salary INT,
+    Manager_id INT
+);
+
+INSERT INTO employee(id, Name, Salary, Manager_id)
+VALUES  ('1', 'Joe', '70000', '3'),
+        ('2', 'Henry', '80000', '4'),
+        ('3', 'Sam', '60000', NULL),
+        ('4', 'Max', '90000', NULL);
+
+
+SELECT query_Employee.Name AS Employee
+FROM
+            (
+            SELECT id, Name, Salary, Manager_id
+            FROM employee
+            WHERE Manager_id IS NULL
+            ) query_Manager
+
+INNER JOIN
+
+            (
+            SELECT id, Name, Salary, Manager_id
+            FROM employee
+            WHERE Manager_id IS NOT NULL
+            ) query_Employee
+
+ON query_Employee.Manager_id = query_Manager.id
+WHERE query_Employee.Salary > query_Manager.Salary;
+
+
+
+
+Query result:
++----------+
+| Employee |
++----------+
+| Joe      |
++----------+
+Affected rows: 1

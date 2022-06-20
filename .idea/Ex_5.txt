@@ -1,0 +1,34 @@
+CREATE TABLE customers(
+    id INT,
+    Name VARCHAR(255)
+);
+
+INSERT INTO customers(id, name)
+VALUES ('1','Joe'),
+       ('2','Henry'),
+       ('3','Sam'),
+       ('4','Max');
+
+CREATE TABLE orders(
+    id INT,
+    customerId INT
+);
+
+INSERT INTO orders(id, customerId)
+VALUES ('1','3'),
+       ('2','1');
+
+
+SELECT Name AS Customers
+FROM customers LEFT JOIN orders
+ON customers.id = orders.customerId
+WHERE orders.customerId IS NULL;
+
+Query result:
++-----------+
+| Customers |
++-----------+
+| Henry     |
+| Max       |
++-----------+
+Affected rows: 2

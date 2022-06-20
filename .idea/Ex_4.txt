@@ -1,0 +1,23 @@
+CREATE TABLE person(
+    id INT,
+    Email VARCHAR(255)
+);
+
+INSERT INTO person(id, Email)
+VALUES ('1','a@b.com'),
+       ('2','c@d.com'),
+       ('3','a@b.com');
+
+SELECT Email
+FROM person
+GROUP BY Email
+HAVING COUNT(Email) > 1;
+
+
+Query result:
++---------+
+| Email   |
++---------+
+| a@b.com |
++---------+
+Affected rows: 1
